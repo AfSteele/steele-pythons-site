@@ -1,0 +1,108 @@
+---
+import SiteLayout from "@/layouts/main.astro";
+import CtaCard from "@/components/cta-card.astro";
+import { wpasset } from "@/lib/wordpress/utils";
+
+const heroImage = wpasset("2026/06/about-page-hero.png");
+const storyImage = wpasset("2026/06/about-page-section2.png");
+const sectionThreeImage = wpasset("2026/06/about-page-section3.png");
+const ctaImage = wpasset("2026/06/about-us-cta.png");
+---
+
+<SiteLayout>
+  <section class="page-content grid gap-10 py-10 md:grid-cols-[1.1fr_0.9fr] md:items-center md:py-14">
+    <div>
+      <h1 class="max-w-xl text-[34px] font-black uppercase leading-[0.96] text-black md:text-[44px]">
+        Born From A Lifelong Passion For Reptiles
+      </h1>
+      <p class="mt-5 max-w-xl text-base leading-relaxed text-[#333] md:text-lg">
+        We're a small family breeder focused on raising healthy ball pythons with
+        care and intention.
+      </p>
+    </div>
+
+    <img
+      src={heroImage}
+      alt="Steele Pythons family"
+      class="ml-auto w-full max-w-[360px] rounded-sm object-cover"
+    />
+  </section>
+
+  <section class="page-content pb-16">
+    <h2 class="text-[30px] font-black uppercase leading-none text-black md:text-[40px]">
+      Our Story
+    </h2>
+
+    <div class="mt-8 space-y-6 text-base leading-relaxed text-[#252525] md:text-lg">
+      <p>
+        Like many in this hobby, my love for reptiles started at a young age. My
+        first real reptile was a normal ball python I picked up while I was in
+        college. As most keepers will tell you, it's nearly impossible to stop at
+        just one. Before long, the collection began to grow - blood pythons,
+        Dumeril's boas, a Burmese python, and of course, more ball pythons. My wife
+        and I even spent a few years keeping leopard geckos as part of our growing
+        reptile family.
+      </p>
+
+      <p>
+        Eventually, life moved forward. Marriage and kids brought new
+        responsibilities, and I no longer had the time I wanted to properly dedicate
+        to my animals, so I stepped away from the hobby for a while.
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-10 md:grid-cols-[1fr_0.95fr] md:items-center">
+      <div class="space-y-6 text-base leading-relaxed text-[#252525] md:text-lg">
+        <p>
+          When my oldest son was three, we visited a local reptile show and picked
+          up a normal male ball python from a breeder we met there. That breeder
+          kindly gave my son a t-shirt to go along with our new pet. Fast forward
+          about 8-9 years later, and my youngest was wearing that same shirt. That
+          moment led me to look the breeder up - and I was surprised to see just how
+          far he had come in the hobby.
+        </p>
+
+        <p>That breeder was Justin Kobylka.</p>
+      </div>
+
+      <img
+        src={storyImage}
+        alt="Child with ball python"
+        class="w-full rounded-sm object-cover"
+      />
+    </div>
+  </section>
+
+  <section class="page-content pb-16">
+    <div class="grid gap-10 md:grid-cols-[1fr_1fr] md:items-center">
+      <img
+        src={sectionThreeImage}
+        alt="Reptile education presentation"
+        class="w-full rounded-sm object-cover"
+      />
+
+      <div class="space-y-6 text-base leading-relaxed text-[#252525] md:text-lg">
+        <p>
+          From there, things really started to grow. What began as a return to a
+          long-lost passion has now evolved into a focused journey toward breeding
+          ball pythons responsibly and intentionally. We're currently breeding many
+          snakes and have exciting things coming!
+        </p>
+
+        <p>
+          Our goal is simple: produce healthy, well-started animals and stay
+          grounded in the care and respect these animals deserve.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-content pb-16">
+    <CtaCard
+      title="Interested In One Of Our Ball Pythons?"
+      body="We're happy to answer questions and help you find the right fit."
+      image={ctaImage}
+      buttonLabel="Contact"
+    />
+  </section>
+</SiteLayout>

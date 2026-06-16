@@ -1,0 +1,82 @@
+---
+import SiteLayout from "@/layouts/main.astro";
+import CtaCard from "@/components/cta-card.astro";
+import { getAvailableClutch } from "@/lib/wordpress";
+import { wpasset } from "@/lib/wordpress/utils";
+
+const slug = Astro.params.slug ?? "";
+const clutch = await getAvailableClutch(slug);
+const ctaImage = wpasset("2026/06/available-cta.png");
+
+if (!clutch) {
+  return Astro.redirect("/available");
+}
+
+const detailLines = clutch.details
+  .split(/\s+(?=(?:Date Laid|Pairing|Results|Description):)/i)
+  .map((line) => line.trim())
+  .filter(Boolean);
+---
+
+<SiteLayout>
+  <section class="page-content py-10 md:py-12">
+    <a
+      href="/available"
+      class="inline-flex text-sm font-black uppercase tracking-wide text-black transition hover:text-[#D19700]"
+    >
+      &lt; Back To Clutches
+    </a>
+
+    <article class="mt-8 rounded-sm bg-[#f2f2f2] p-6 shadow-2xl md:p-12">
+      <h1 class="text-base font-black text-black md:text-lg">{clutch.title}</h1>
+
+      <div class="mt-8 flex w-full max-w-[430px] items-center justify-center rounded-sm bg-white p-4">
+        <img
+          src={clutch.image || wpasset("2026/06/placeholder-clutch.jpg")}
+          alt={clutch.imageAlt}
+          class="max-h-[330px] w-full object-contain"
+        />
+      </div>
+
+      <div class="mt-10 max-w-4xl text-sm leading-relaxed text-black">
+        <h2 class="font-black">Details</h2>
+        <div class="mt-2 space-y-1">
+          {
+            detailLines.length ? (
+              detailLines.map((line) => {
+                const [label, ...rest] = line.split(":");
+                const value = rest.join(":").trim();
+
+                return value ? (
+                  <p>
+                    <span class="font-semibold">{label}:</span> {value}
+                  </p>
+                ) : (
+                  <p>{line}</p>
+                );
+              })
+            ) : (
+              <>
+                {clutch.dateLaid && (
+                  <p>
+                    <span class="font-semibold">Date Laid:</span> {clutch.dateLaid}
+                  </p>
+                )}
+                {clutch.summary && <p>{clutch.summary}</p>}
+              </>
+            )
+          }
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section class="page-content pb-16">
+    <CtaCard
+      title="Don't See What You're Looking For?"
+      body="New clutches are always in the works. Reach out and let us know what you're interested in - we may have something available soon."
+      image={ctaImage}
+      buttonLabel="Reach Out"
+    />
+  </section>
+</SiteLayout>

@@ -1,0 +1,68 @@
+---
+import SiteLayout from "@/layouts/main.astro";
+import CtaCard from "@/components/cta-card.astro";
+import { wpasset } from "@/lib/wordpress/utils";
+
+const ctaImage = wpasset("2026/06/placeholder-clutch.jpg");
+const faqs = [
+  {
+    question: "What is a ball python?",
+    answer:
+      "Ball pythons are a beginner-friendly species of snake known for their manageable size and gentle temperament. They're one of the most popular pet snakes because they are easy to care for compared to many other reptiles.",
+  },
+  {
+    question: "Are your snakes captive-bred?",
+    answer:
+      "Yes. Our animals are captive-bred and raised with consistent care, handling, and feeding records before they are made available.",
+  },
+  {
+    question: "What do ball pythons eat?",
+    answer:
+      "Ball pythons eat appropriately sized rodents. We will provide each animal's current feeding information so the transition to a new home is straightforward.",
+  },
+  {
+    question: "Do you guarantee health on arrival?",
+    answer:
+      "Yes. We stand behind the health of every animal we sell and communicate clearly about shipping, pickup, and arrival expectations before an animal leaves our care.",
+  },
+  {
+    question: "Do you ship snakes?",
+    answer:
+      "Shipping availability depends on weather, destination, and current carrier conditions. We only ship when it is safe for the animal.",
+  },
+];
+---
+
+<SiteLayout>
+  <section class="page-content py-10 md:py-14">
+    <h1 class="text-[34px] font-black uppercase leading-none text-black md:text-[44px]">
+      FAQs
+    </h1>
+
+    <div class="mt-8 border-t border-black/70">
+      {
+        faqs.map((faq) => (
+          <details
+            class="group border-b border-black/45 py-4"
+          >
+            <summary class="flex cursor-pointer list-none items-center justify-between gap-6 text-base font-medium text-[#252525] marker:hidden md:text-lg [&::-webkit-details-marker]:hidden">
+              <span>{faq.question}</span>
+              <span class="relative h-5 w-5 shrink-0 before:absolute before:left-0 before:top-1/2 before:h-px before:w-full before:bg-[#252525] after:absolute after:left-1/2 after:top-0 after:h-full after:w-px after:bg-[#252525] after:transition-opacity group-open:after:opacity-0" />
+            </summary>
+            <p class="mt-4 max-w-3xl text-sm leading-relaxed text-[#666] md:text-base">
+              {faq.answer}
+            </p>
+          </details>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="page-content pb-16">
+    <CtaCard
+      title="Still Have Questions? We Are Here To Help."
+      image={ctaImage}
+      class="md:px-16 md:py-20"
+    />
+  </section>
+</SiteLayout>

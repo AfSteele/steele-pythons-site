@@ -1,0 +1,69 @@
+---
+import SiteLayout from "@/layouts/main.astro";
+import CtaCard from "@/components/cta-card.astro";
+import { getAvailableClutches } from "@/lib/wordpress";
+import { wpasset } from "@/lib/wordpress/utils";
+
+const clutchFallbackImage = wpasset("2026/06/placeholder-clutch.jpg");
+const availableCtaImage = wpasset("2026/06/available-cta.png");
+const clutches = await getAvailableClutches(24);
+---
+
+<SiteLayout>
+  <section class="page-content py-10 md:py-12">
+    <div class="mx-auto max-w-3xl text-center">
+      <h1 class="text-[30px] font-black uppercase leading-none text-black md:text-[40px]">
+        Available Clutches
+      </h1>
+      <p class="mx-auto mt-5 max-w-3xl text-base leading-relaxed text-[#333]">
+        Every clutch is raised with care and updated as animals become available. Click below
+        to view genetics, hatch dates, and photos.
+      </p>
+    </div>
+
+    {
+      clutches.length ? (
+        <div class="mx-auto mt-8 grid max-w-[760px] gap-x-12 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+          {clutches.map((clutch) => (
+            <a
+              href={clutch.link}
+              class="group block rounded-sm border border-[#d8d8d8] bg-white p-3 text-left shadow-md transition hover:-translate-y-1 hover:shadow-xl"
+            >
+              <div class="flex aspect-[1.18] items-center justify-center rounded-[2px] bg-white p-2 shadow-[0_0_18px_rgba(0,0,0,0.18)]">
+                <img
+                  src={clutch.image || clutchFallbackImage}
+                  alt={clutch.imageAlt}
+                  class="max-h-full w-full rounded-[2px] object-contain"
+                />
+              </div>
+              <div class="space-y-1 px-1 pb-1 pt-4 text-sm leading-snug text-black">
+                <h2 class="font-medium">{clutch.title}</h2>
+                {clutch.dateLaid && <p class="font-semibold">Date Laid: {clutch.dateLaid}</p>}
+                <p class="text-sm text-[#777] transition group-hover:text-[#D19700]">
+                  See More &gt;
+                </p>
+              </div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <div class="mx-auto mt-12 max-w-2xl rounded-sm border border-[#d8d8d8] bg-white p-8 text-center shadow-md">
+          <h2 class="text-2xl font-semibold uppercase">No clutches posted yet</h2>
+          <p class="mt-3 text-[#555]">
+            Add posts in WordPress using the category <strong>available-clutches</strong>.
+            Once published, they will appear here automatically.
+          </p>
+        </div>
+      )
+    }
+  </section>
+
+  <section class="page-content pb-16">
+    <CtaCard
+      title="Don't See What You're Looking For?"
+      body="New clutches are always in the works. Reach out and let us know what you're interested in - we may have something available soon."
+      image={availableCtaImage}
+      buttonLabel="Reach Out"
+    />
+  </section>
+</SiteLayout>

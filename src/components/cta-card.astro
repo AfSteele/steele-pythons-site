@@ -1,0 +1,41 @@
+---
+type Props = {
+  title: string;
+  image: string;
+  href?: string;
+  buttonLabel?: string;
+  body?: string;
+  class?: string;
+};
+
+const {
+  title,
+  image,
+  href = "/contact",
+  buttonLabel = "Contact Us",
+  body,
+  class: className = "",
+} = Astro.props;
+---
+
+<div
+  class={`overflow-hidden rounded-sm bg-[#222] bg-cover bg-center px-6 py-12 text-white shadow-2xl sm:px-10 md:px-12 md:py-16 ${className}`}
+  style={`background-image: linear-gradient(rgba(0,0,0,.77), rgba(0,0,0,.77)), url('${image}')`}
+>
+  <h2 class="max-w-2xl text-[30px] font-black uppercase leading-none md:text-[40px]">
+    {title}
+  </h2>
+  {
+    body && (
+      <p class="mt-5 max-w-2xl text-base leading-relaxed md:text-lg">
+        {body}
+      </p>
+    )
+  }
+  <a
+    href={href}
+    class="mt-7 inline-flex rounded-sm bg-[#D19700] px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-md transition hover:bg-white hover:text-black"
+  >
+    {buttonLabel}
+  </a>
+</div>

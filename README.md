@@ -1,43 +1,37 @@
-# Astro Starter Kit: Minimal
+# Steele Pythons Site
+
+Astro site for Steele Pythons with WordPress used as the content source for available clutches.
+
+## WordPress Clutch Entry
+
+The available clutch cards are pulled from WordPress posts in the `available-clutches` category.
+
+For each clutch record:
+
+1. In WordPress, create a new Post.
+2. Set the post title to the clutch ID, for example `Clutch ID: 2026 #6`.
+3. Add the category `available-clutches`.
+4. Set the Featured Image to the clutch photo. This is the image shown on the homepage and availability page.
+5. Add the date laid in the excerpt using this format: `Date Laid: 6/4/2026`.
+6. Add full details, hatch updates, genetics, and additional notes in the post body.
+7. Publish the post.
+
+The homepage shows the latest three clutch posts. The `/available` page shows the latest twenty-four.
+
+## WordPress Homepage Images
+
+Upload these images to WordPress Media with these filenames or slugs:
+
+- `home-hero-python`
+- `contact-python`
+- `placeholder-clutch`
+
+The clutch cards use each post's Featured Image. The `placeholder-clutch` image is only used if a clutch post is missing a Featured Image.
+
+## Commands
 
 ```sh
-pnpm create astro@latest -- --template minimal
+pnpm install
+pnpm dev
+pnpm build
 ```
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
-
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).

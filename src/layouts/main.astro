@@ -1,0 +1,105 @@
+---
+import "@/styles/global.css";
+import { menuItems } from "@/components/header/menu-items";
+import { MobileNav } from "@/components/header/mobile-nav";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/webp" href="/steele-pythons-logo.webp" />
+    <title>Steele Pythons</title>
+  </head>
+
+  <body class="bg-white">
+    <div class="min-h-screen bg-white">
+      <header id="site-header" class="sticky top-0 z-50 bg-white/95 transition-shadow duration-200 backdrop-blur">
+        <div class="page-content flex items-center justify-between py-6">
+          <a href="/" class="inline-flex items-center" aria-label="Steele Pythons home">
+            <img
+              src="/steelepythons-logo.png"
+              alt="Steele Pythons"
+              class="h-16 w-auto md:h-20"
+            />
+          </a>
+
+          <nav class="hidden gap-14 md:flex">
+            {
+              menuItems.map((item) => (
+                <a href={item.href} class="text-sm font-semibold uppercase tracking-wide hover:text-[#D19700]">
+                  {item.label}
+                </a>
+              ))
+            }
+          </nav>
+
+          <div class="hidden md:block">
+            <a href="/contact" class="inline-flex min-w-32 justify-center rounded-sm bg-[#D19700] px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-md transition hover:bg-black">
+              Contact Us
+            </a>
+          </div>
+
+          <div class="md:hidden">
+            <MobileNav client:load />
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <slot />
+      </main>
+
+      <footer>
+        <div class="page-content grid gap-8 py-14 text-sm uppercase tracking-wide md:grid-cols-3 md:items-start">
+          <div>
+            <p class="font-semibold">Connect With Us</p>
+            <div class="mt-3 flex items-center gap-3">
+              <a href="https://www.instagram.com/" aria-label="Instagram" class="inline-flex">
+                <img
+                  src="/footer/Subtract.png"
+                  alt="Instagram"
+                  class="h-5 w-auto"
+                />
+              </a>
+              <a href="https://www.facebook.com/" aria-label="Facebook" class="inline-flex">
+                <img
+                  src="/footer/facebook-f-brands-solid-full 1.png"
+                  alt="Facebook"
+                  class="h-5 w-auto"
+                />
+              </a>
+            </div>
+          </div>
+
+          <div class="space-y-1">
+            <p><span class="font-semibold">Email:</span> thomas@steelepythons.com</p>
+            <p><span class="font-semibold">Phone #:</span> 770-789-8519</p>
+          </div>
+
+          <div class="flex justify-start md:justify-end">
+            <img
+              src="/footer/morph-market-logo.png"
+              alt="MorphMarket"
+              class="h-10 w-auto"
+            />
+          </div>
+        </div>
+
+        <div class="page-content pb-5 text-center text-[14px]">
+          <p>&copy; 2026 Steele Pythons. All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
+    <script>
+      const header = document.getElementById("site-header");
+
+      const updateHeaderShadow = () => {
+        header?.classList.toggle("shadow-md", window.scrollY > 8);
+      };
+
+      updateHeaderShadow();
+      window.addEventListener("scroll", updateHeaderShadow, { passive: true });
+    </script>
+  </body>
+</html>
