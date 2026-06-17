@@ -23,7 +23,7 @@ export function MobileNav() {
         <div className="mb-8 flex items-center justify-between">
           <a href="/" className="inline-flex items-center" aria-label="Steele Pythons home">
             <img
-              src="/steelepythons-logo.png"
+              src="/navbar-img.jpg"
               alt="Steele Pythons"
               className="h-12 w-auto"
             />
