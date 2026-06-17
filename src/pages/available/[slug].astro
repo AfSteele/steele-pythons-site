@@ -1,16 +1,20 @@
 ---
 import SiteLayout from "@/layouts/main.astro";
 import CtaCard from "@/components/cta-card.astro";
-import { getAvailableClutch } from "@/lib/wordpress";
+import { getAvailableClutches } from "@/lib/wordpress";
 import { wpasset } from "@/lib/wordpress/utils";
 
-const slug = Astro.params.slug ?? "";
-const clutch = await getAvailableClutch(slug);
-const ctaImage = wpasset("2026/06/available-cta.png");
+export async function getStaticPaths() {
+  const clutches = await getAvailableClutches(50);
 
-if (!clutch) {
-  return Astro.redirect("/available");
+  return clutches.map((clutch) => ({
+    params: { slug: clutch.slug },
+    props: { clutch },
+  }));
 }
+
+const { clutch } = Astro.props;
+const ctaImage = wpasset("2026/06/available-cta.png");
 
 const detailLines = clutch.details
   .split(/\s+(?=(?:Date Laid|Pairing|Results|Description):)/i)
